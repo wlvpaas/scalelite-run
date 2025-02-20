@@ -8,34 +8,14 @@ upstream docker-scalelite-recordings {
     server scalelite-recordings:80;
 }
 
+
+
 server {
     server_name $NGINX_HOSTNAME;
 
-    listen  80;
+    listen 80;
     listen [::]:80;
 
-    location /.well-known/acme-challenge/ {
-        root /var/www/certbot;
-    }
-
-    location / {
-        return  301 https://$host$request_uri;
-    }
-}
-
-server {
-    server_name $NGINX_HOSTNAME;
-
-    listen 443 ssl;
-    listen [::]:443 ssl;
-
-    ## Configuration for Letsencrypt SSL Certificate
-    ssl_certificate /etc/letsencrypt/live/$NGINX_HOSTNAME/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/$NGINX_HOSTNAME/privkey.pem;
-
-    ## Configuration for SSL Certificate from a CA other than LetsEncrypt
-    #ssl_certificate /etc/ssl/fullchain.pem;
-    #ssl_certificate_key /etc/ssl/privkey.pem;
 
     location /health_check {
         proxy_pass http://docker-scalelite-api;
