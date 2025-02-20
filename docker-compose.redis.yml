@@ -1,0 +1,15 @@
+version: '3'
+
+volumes:
+  redis-data:
+
+services:
+  redis:
+    image: ${REDIS_DOCKER_IMAGE:-redis:6.2-alpine}
+    container_name: redis
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+      - ./data/redis/conf/redis.conf.template:/usr/local/etc/redis/redis.conf.template
+      - ./data/certbot/conf/:/etc/letsencrypt
+    command: /bin/sh -c "sed -e 's/$$HOSTNAME/${REDIS_HOST:-redis}.${DOMAIN_NAME:-user.blindside-ps.dev}/' /usr/local/etc/redis/redis.conf.template > /usr/local/etc/redis/redis.conf && exec redis-server --appendonly yes"
