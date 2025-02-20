@@ -3,11 +3,10 @@ version: '3'
 services:
   scalelite-proxy:
     image: ${NGINX_DOCKER_IMAGE:-nginx:1.24}
-    container_name: scalelite-proxy
     restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
+    expose:
+      - 80
+      - 443
     environment:
       - NGINX_HOSTNAME=${SL_HOST:-sl.xlab.blindside-ps.dev}
     volumes:
