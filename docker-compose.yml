@@ -1,11 +1,20 @@
 networks:
   dokploy-network:
     external: true
+  scalelite-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.7.8.0/24"
 
 services:
   scalelite-proxy:
     image: ${NGINX_DOCKER_IMAGE:-nginx:1.26}
     restart: unless-stopped
+    networks:
+      dokploy-network:
+      scalelite-network:
+        ipv4_address: "10.7.8.2"
     expose:
       - 80
     environment:
@@ -27,6 +36,10 @@ services:
       - ${SCALELITE_RECORDING_DIR:-/mnt/scalelite-recordings/var/bigbluebutton}/published:/var/bigbluebutton/published
     depends_on:
       - scalelite-api
+    networks:
+      dokploy-network:
+      scalelite-network:
+        ipv4_address: "10.7.8.3"
 
   scalelite-api:
     image: ${SCALELITE_DOCKER_IMAGE:-blindsidenetwks/scalelite:v1.6.3}
@@ -44,6 +57,10 @@ services:
       - ${SCALELITE_RECORDING_DIR:-/mnt/scalelite-recordings/var/bigbluebutton}:/var/bigbluebutton
     logging:
       driver: journald
+    networks:
+      dokploy-network:
+      scalelite-network:
+        ipv4_address: "10.7.8.4"
 
   scalelite-poller:
     image: ${SCALELITE_DOCKER_IMAGE:-blindsidenetwks/scalelite:v1.6.3}
@@ -61,6 +78,10 @@ services:
       - scalelite-api
     logging:
       driver: journald
+    networks:
+      dokploy-network:
+      scalelite-network:
+        ipv4_address: "10.7.8.5"
 
   scalelite-recording-importer:
     image: ${SCALELITE_DOCKER_IMAGE:-blindsidenetwks/scalelite:v1.6.3}
@@ -81,3 +102,7 @@ services:
       - scalelite-api
     logging:
       driver: journald
+    networks:
+      dokploy-network:
+      scalelite-network:
+        ipv4_address: "10.7.8.6"
