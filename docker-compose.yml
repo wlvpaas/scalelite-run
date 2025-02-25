@@ -112,7 +112,7 @@ services:
       - SUDO_ACCESS=false
       - USER_NAME=bigbluebutton
       - LOG_STDOUT=true
-      - PUBLIC_KEY_DIR="/public-keys"
+      - PUBLIC_KEY_DIR=/public-keys
     volumes:
       - ssh-data:/config
       - ../files/keys:/public-keys
