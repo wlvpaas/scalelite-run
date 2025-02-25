@@ -1,11 +1,11 @@
 #### For <$NGINX_HOSTNAME>
 
 upstream docker-scalelite-api {
-    server scalelite-api:3000;
+    server $SL_API_HOST;
 }
 
 upstream docker-scalelite-recordings {
-    server scalelite-recordings:80;
+    server $SL_RECORDINGS_HOST;
 }
 
 
@@ -14,7 +14,6 @@ server {
     server_name $NGINX_HOSTNAME;
 
     listen 80;
-    listen [::]:80;
 
 
     location /health_check {
