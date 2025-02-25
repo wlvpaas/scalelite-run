@@ -117,3 +117,5 @@ services:
       - ssh-data:/config
       - ../files/keys:/config/keys
       - ./data/ssh/scripts:/custom-cont-init.d:ro
+    ports:
+      - ${SL_SSH_PORT:-2222}:22
