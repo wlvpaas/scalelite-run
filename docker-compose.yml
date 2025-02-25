@@ -19,7 +19,7 @@ services:
       - SL_API_HOST=${SL_API_HOST:-scalelite-api:3000}
       - SL_RECORDINGS_HOST=${SL_RECORDINGS_HOST:-scalelite-recordings:80}
     volumes:
-      - /var/log/${HASH}/proxy/:/var/log/nginx
+      - /var/log/${HASH}/scalelite-proxy/:/var/log/nginx
       - ./data/proxy/nginx/sites.template.${DOCKER_PROXY_NGINX_TEMPLATE:-scalelite-proxy}:/etc/nginx/sites.template
       - ./data/proxy/nginx/sites-common:/etc/nginx/sites-common
     depends_on:
@@ -31,7 +31,7 @@ services:
     image: ${SCALELITE_RECORDINGS_DOCKER_IMAGE:-bigbluebutton/bbb-playback-proxy:focal-260-alpine}
     restart: unless-stopped
     volumes:
-      - /var/log/${HASH}/recordings/:/var/log/nginx
+      - /var/log/${HASH}/scalelite-recordings/:/var/log/nginx
       - ${SCALELITE_RECORDING_DIR:-/mnt/scalelite-recordings/var/bigbluebutton}/published:/var/bigbluebutton/published
     depends_on:
       - scalelite-api
