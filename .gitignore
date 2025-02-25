@@ -10,6 +10,7 @@
 !/data/certbot/
 !/data/nginx/
 !/data/proxy/
+!/data/ssh/
 /data/redis/db*
 !/data/redis/
 /data/postgres/db*
