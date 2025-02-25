@@ -106,7 +106,7 @@ services:
     restart: unless-stopped
     environment:
       - PUID=1000
-      - PGID=2000
+      - PGID=1000
       - TZ=UTC
       - PASSWORD_ACCESS=false
       - SUDO_ACCESS=false
