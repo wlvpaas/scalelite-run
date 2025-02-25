@@ -50,7 +50,7 @@ services:
       - SERVER_ID_IS_HOSTNAME=${SERVER_ID_IS_HOSTNAME:-false}
       - RAILS_LOG_TO_STDOUT=${RAILS_LOG_TO_STDOUT:-false}
     volumes:
-      - /var/log/${HASH}/scalelite-api/:/srv/scalelite/log/
+      - /var/log/${HASH}/scalelite-api/:/srv/scalelite/log
       - ${SCALELITE_RECORDING_DIR:-/mnt/scalelite-recordings/var/bigbluebutton}:/var/bigbluebutton
     logging:
       driver: journald
