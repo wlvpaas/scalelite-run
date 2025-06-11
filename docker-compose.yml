@@ -7,7 +7,7 @@ networks:
 
 services:
   scalelite-proxy:
-    image: ${NGINX_DOCKER_IMAGE:-nginx:1.26}
+    image: ${NGINX_DOCKER_IMAGE:-nginx:1.28}
     restart: unless-stopped
     networks:
       - dokploy-network
@@ -39,7 +39,7 @@ services:
       - default
 
   scalelite-api:
-    image: ${SCALELITE_DOCKER_IMAGE:-blindsidenetwks/scalelite:v1.6.3}
+    image: ${SCALELITE_DOCKER_IMAGE:-blindsidenetwks/scalelite:v1.6.5}
     restart: unless-stopped
     env_file:
       - .env
@@ -59,7 +59,7 @@ services:
       - default
 
   scalelite-poller:
-    image: ${SCALELITE_DOCKER_IMAGE:-blindsidenetwks/scalelite:v1.6.3}
+    image: ${SCALELITE_DOCKER_IMAGE:-blindsidenetwks/scalelite:v1.6.5}
     restart: unless-stopped
     env_file:
       - .env
@@ -79,7 +79,7 @@ services:
       - default
 
   scalelite-recording-importer:
-    image: ${SCALELITE_DOCKER_IMAGE:-blindsidenetwks/scalelite:v1.6.3}
+    image: ${SCALELITE_DOCKER_IMAGE:-blindsidenetwks/scalelite:v1.6.5}
     restart: unless-stopped
     env_file:
       - .env
