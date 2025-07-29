@@ -118,5 +118,6 @@ services:
       - ssh-data:/config
       - ../files/keys:/public-keys
       - ./data/ssh/scripts:/custom-cont-init.d:ro
+      - ${SCALELITE_RECORDING_DIR:-/mnt/scalelite-recordings/var/bigbluebutton}:/var/bigbluebutton
     ports:
       - ${SL_SSH_PORT:-2222}:2222
