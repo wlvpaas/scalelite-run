@@ -14,6 +14,7 @@ services:
       - default
     expose:
       - 80
+      - 443
     environment:
       - NGINX_HOSTNAME=${SL_HOST:-sl.xlab.blindside-ps.dev}
       - SL_API_HOST=${SL_API_HOST:-scalelite-api:3000}
@@ -105,14 +106,14 @@ services:
     image: lscr.io/linuxserver/openssh-server:latest
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=UTC
-      - PASSWORD_ACCESS=false
-      - SUDO_ACCESS=false
-      - USER_NAME=bigbluebutton
-      - LOG_STDOUT=true
-      - PUBLIC_KEY_DIR=/public-keys
+      - PUID=${SSH_PUID:-1000}
+      - PGID=${SSH_PGID:-1000}
+      - TZ=${TZ:-UTC}
+      - PASSWORD_ACCESS=${SSH_PASSWORD_ACCESS:-false}
+      - SUDO_ACCESS=${SSH_SUDO_ACCESS:-false}
+      - USER_NAME=${SSH_USER_NAME:-bigbluebutton}
+      - LOG_STDOUT=${SSH_LOG_STDOUT:-true}
+      - PUBLIC_KEY_DIR=${SSH_PUBLIC_KEY_DIR:-/public-keys}
     volumes:
       - ssh-data:/config
       - ../files/keys:/public-keys
